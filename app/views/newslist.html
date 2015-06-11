@@ -1,8 +1,35 @@
 <div class="page">
 
-  <div class="newslist-row" ng-repeat="item in news">
-    <div ng-bind="::item.date"></div>
-    <div ng-bind="::item.title.__cdata"></div>
+  <div class="newslist-overlay"
+    ng-if="expandedItem"
+    ng-click="toggleExpanded(expandedItem);"></div>
+
+  <div class="newslist-row"
+    ng-class="{'expanded': item.expanded, 'read': item.read}"
+    ng-click="toggleExpanded(item); markAsRead(item);"
+    ng-repeat="item in news">
+
+    <div class="newslist-item-content">
+
+      <div class="newslist-item-title"
+        ng-bind="::item.title.__cdata"></div>
+
+      <time class="newslist-item-date" datetime="{{::item.date.__text}}"
+        ng-bind="::formatDate(item.date.__text);"></time>
+
+      <div class="newslist-item-full-content"
+        ng-if="item.expanded">
+
+        <div class="newslist-item-summary"
+          ng-bind-html="::item.description.__cdata"></div>
+
+        <div class="newslist-item-link">
+          <a href="{{::item.link}}">Read the full article at DN.se</a>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
 </div>

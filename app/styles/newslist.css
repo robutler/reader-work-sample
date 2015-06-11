@@ -1,13 +1,17 @@
 .newslist-row {
   border-bottom: 1px solid #eee;
   cursor: pointer;
-  padding: 0 2rem;
-  height: 4rem;
+  padding: 0.75rem 2rem;
+}
+
+.newslist-row.expanded {
+  transform: translateZ(0);
 }
 
 .newslist-row.ng-enter {
   opacity: 0;
-  transition: opacity linear 0.5s;
+  transform: translateY(-0.5rem);
+  transition: opacity linear 0.5s, transform ease-out 0.2s;
 }
 
 .newslist-row.ng-enter-stagger {
@@ -16,8 +20,67 @@
 
 .newslist-row.ng-enter-active {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .newslist-row:hover {
   background-color: #fafafa;
+}
+
+.newslist-item-date {
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+
+.newslist-item-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.newslist-row.read:not(.expanded) .newslist-item-title {
+  color: #999;
+}
+
+.newslist-item-full-content {
+  padding-top: 1rem;
+}
+
+.newslist-item-full-content.ng-enter {
+  opacity: 0;
+  transition: opacity linear 0.5s;
+}
+
+.newslist-item-full-content.ng-enter-active {
+  opacity: 1;
+}
+
+.newslist-item-summary {
+  line-height: 1.5;
+  padding-bottom: 1rem;
+}
+
+.newslist-item-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.newslist-overlay {
+  background-color: #fff;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  opacity: 0.5;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.newslist-overlay.ng-enter {
+  opacity: 0;
+  transition: opacity linear 0.5s;
+}
+
+.newslist-overlay.ng-enter-active {
+  opacity: 0.5;
 }

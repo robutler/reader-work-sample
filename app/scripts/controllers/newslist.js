@@ -16,6 +16,35 @@
       $scope.news = data;
     });
 
+    $scope.expandedItem = undefined;
+
+    $scope.toggleExpanded = function (item) {
+      item.expanded  = !item.expanded;
+
+      if (item.expanded) {
+
+        if ($scope.expandedItem) {
+          $scope.expandedItem.expanded = false;
+        }
+        $scope.expandedItem = item;
+
+      } else {
+        $scope.expandedItem = undefined;
+      }
+    };
+
+    $scope.markAsRead = function (item) {
+      console.log('markAsRead');
+      if (!item.read) {
+        item.read = true;
+      }
+    };
+
+    $scope.formatDate = function (date) {
+      var dateObj = new Date(date);
+      return dateObj.toDateString() + ', ' + dateObj.toLocaleTimeString();
+    };
+
   }]);
 
 })(this);

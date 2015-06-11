@@ -6,6 +6,7 @@
       'ngAnimate',
       'ngResource',
       'ngRoute',
+      'ngSanitize',
       'ngTouch'
     ]);
 
