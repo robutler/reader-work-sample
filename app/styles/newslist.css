@@ -70,11 +70,24 @@
 
 .newslist-item-full-content.ng-enter {
   opacity: 0;
-  transition: opacity linear 0.5s;
+  transform: scaleY(0);
+  transition: opacity linear 0.5s 0.2s, transform ease-out 0.2s;
 }
 
 .newslist-item-full-content.ng-enter-active {
   opacity: 1;
+  transform: scaleY(1);
+}
+
+.newslist-item-full-content.ng-leave {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: opacity linear 0.1s, transform ease-out 0.2s 0.1s;
+}
+
+.newslist-item-full-content.ng-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .newslist-item-summary {
