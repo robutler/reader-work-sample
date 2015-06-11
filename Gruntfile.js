@@ -1,6 +1,8 @@
 // Generated on 2015-06-11 using generator-angular 0.11.1
 'use strict';
 
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -14,6 +16,8 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -61,11 +65,24 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/dn',
+          host:'www.dn.se',
+          headers: {
+            'host': 'www.dn.se'
+          },
+          rewrite: {
+            '^/dn': ''
+          }
+        }
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+              proxySnippet,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -313,7 +330,6 @@ module.exports = function (grunt) {
     }
   });
 
-
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -322,6 +338,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'configureProxies:server',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',

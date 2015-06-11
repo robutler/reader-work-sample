@@ -11,7 +11,9 @@
    * # MainCtrl
    * Controller of the readerWorkSampleApp
    */
-  app.controller('MainCtrl', ['$scope', function ($scope) {
+  app.controller('MainCtrl', ['$scope', 'NewsService', function ($scope, NewsService) {
+    NewsService.fetchNews().then(function (data) {
+    });
 
   }]);
 
