@@ -3,7 +3,7 @@
 
   var angular = window.angular,
     console = window.console,
-    x2js = new window.X2JS(),
+    X2JS = window.X2JS,
     app = angular.module('readerWorkSampleApp');
 
   /**
@@ -17,6 +17,7 @@
     console.info('NewsService started');
 
     var service = {},
+      // Proxied locally to avoid cross-domain request issues, resolves to http://www.dn.se/nyheter/m/rss/
       newsPath = 'http://localhost:9000/dn/nyheter/m/rss/';
 
     /**
@@ -27,14 +28,22 @@
      * @returns {Object} Returns a promise object.
      */
     service.fetchNews = function () {
-      var deferred = $q.defer();
+      var deferred = $q.defer(),
+        x2js = new X2JS();
 
       $http.get(newsPath)
         .success(function (data, status, headers, config) {
           var json = x2js.xml_str2json(data);
 
-          service.news = json;
-          deferred.resolve(json);
+          if (json.hasOwnProperty('rss') &&
+              json.rss.hasOwnProperty('channel') &&
+              json.rss.channel.hasOwnProperty('item')) {
+            service.news = json.rss.channel.item;
+            deferred.resolve(json.rss.channel.item);
+          } else {
+            deferred.reject('No items in the feed');
+          }
+
         })
         .error(function (data, status, headers, config) {
           deferred.reject('Unable to fetch news');

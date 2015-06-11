@@ -1,0 +1,23 @@
+.newslist-row {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  padding: 0 2rem;
+  height: 4rem;
+}
+
+.newslist-row.ng-enter {
+  opacity: 0;
+  transition: opacity linear 0.5s;
+}
+
+.newslist-row.ng-enter-stagger {
+  transition-delay: 0.025s;
+}
+
+.newslist-row.ng-enter-active {
+  opacity: 1;
+}
+
+.newslist-row:hover {
+  background-color: #fafafa;
+}

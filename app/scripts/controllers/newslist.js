@@ -6,13 +6,14 @@
 
   /**
    * @ngdoc function
-   * @name readerWorkSampleApp.controller:MainCtrl
+   * @name readerWorkSampleApp.controller:NewsListController
    * @description
-   * # MainCtrl
+   * # NewsListController
    * Controller of the readerWorkSampleApp
    */
-  app.controller('MainCtrl', ['$scope', 'NewsService', function ($scope, NewsService) {
+  app.controller('NewsListController', ['$scope', 'NewsService', function ($scope, NewsService) {
     NewsService.fetchNews().then(function (data) {
+      $scope.news = data;
     });
 
   }]);
