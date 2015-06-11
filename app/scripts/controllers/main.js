@@ -1,17 +1,18 @@
-'use strict';
+(function (window) {
+  'use strict';
 
-/**
- * @ngdoc function
- * @name readerWorkSampleApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the readerWorkSampleApp
- */
-angular.module('readerWorkSampleApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  var angular = window.angular,
+    app = angular.module('readerWorkSampleApp');
+
+  /**
+   * @ngdoc function
+   * @name readerWorkSampleApp.controller:MainCtrl
+   * @description
+   * # MainCtrl
+   * Controller of the readerWorkSampleApp
+   */
+  app.controller('MainCtrl', ['$scope', function ($scope) {
+
+  }]);
+
+})(this);

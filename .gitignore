@@ -1,0 +1,10 @@
+# temp folder
+.tmp
+
+# dist folder
+dist
+
+# Dependency directory
+# https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
+bower_components
+node_modules
