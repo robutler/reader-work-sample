@@ -27,6 +27,29 @@
   background-color: #fafafa;
 }
 
+
+.newslist-item-content {
+  transition: transform ease-out 0.5s;
+}
+
+.newslist-row.expanded .newslist-item-content {
+  transform: translate3d(1rem, 0, 0);
+}
+
+.newslist-item-flair {
+  background-color: #16a085;
+  height: 100%;
+  position: absolute;
+  transform: translateX(-4rem);
+  transition: transform ease-out 0.5s;
+  width: 0.4rem;
+}
+
+.newslist-row.expanded .newslist-item-flair {
+  transform: translateX(-3rem);
+
+}
+
 .newslist-item-date {
   font-size: .8rem;
   text-transform: uppercase;
@@ -38,7 +61,7 @@
 }
 
 .newslist-row.read:not(.expanded) .newslist-item-title {
-  color: #999;
+  color: #888;
 }
 
 .newslist-item-full-content {
