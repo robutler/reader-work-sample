@@ -7,6 +7,8 @@
   /**
    * @ngdoc function
    * @name readerWorkSampleApp.controller:NewsListController
+   * @requires $scope
+   * @requires NewsService
    * @description
    * # NewsListController
    * Controller of the readerWorkSampleApp

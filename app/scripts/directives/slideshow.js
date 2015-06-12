@@ -4,8 +4,21 @@
   var angular = window.angular,
     app = angular.module('readerWorkSampleApp');
 
+  /**
+    * @ngdoc directive
+    * @name readerWorkSampleApp.directive:slideShow
+    * @restrict E
+    * @element ANY
+    * @scope
+    * @description
+    * Creates a slide show from an array of news items.
+    *
+    * @example
+      <slide-show items="myItems"></slide-show>
+    **/
   app.directive('slideShow', ['$interval', function ($interval) {
 
+    // Colors borrowed from Material design
     var colorPalette = [
       {
         name: 'Red',
@@ -83,20 +96,6 @@
       scope: {
         items: '='
       },
-      link: link
-    }
-
-  }]);
-
-  app.directive('slideShowItem', [function () {
-
-    function link(scope, element, attrs) {
-
-    }
-
-    return {
-      templateUrl: 'views/slideshowitem.html',
-      restrict: 'E',
       link: link
     }
 

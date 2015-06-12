@@ -7,6 +7,8 @@
   /**
    * @ngdoc function
    * @name readerWorkSampleApp.controller:NewsSlideController
+   * @requires $scope
+   * @requires NewsService
    * @description
    * # NewsSlideController
    * Controller of the readerWorkSampleApp
@@ -14,6 +16,7 @@
   app.controller('NewsSlideController', ['$scope', 'NewsService', function ($scope, NewsService) {
     console.info('NewsSlideController started');
 
+    // Parses a string of HTML and returns the first image source it finds.
     function extractImageUrl(string) {
       var html = string,
         div, image;
@@ -31,6 +34,7 @@
     NewsService.fetchNews().then(function (data) {
       var items = data;
 
+      // Add image source key to the items if it exists
       items.forEach(function (item) {
         item.imageSrc = extractImageUrl(item.description.__cdata);
       });
