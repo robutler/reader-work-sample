@@ -43,11 +43,14 @@ a:hover {
   font-size: 2rem;
   font-weight: 300;
   margin: 2rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .root-header .buttons {
   align-self: center;
   padding: 2rem;
+  white-space: nowrap;
 }
 
 .header-button {
@@ -97,6 +100,5 @@ a:hover {
 }
 
 .page {
-  height: 100vh;
   width: 100%;
 }

@@ -29,11 +29,12 @@
 
 
 .newslist-item-content {
+  position: relative;
   transition: transform ease-out 0.5s;
 }
 
 .newslist-row.expanded .newslist-item-content {
-  transform: translate3d(1rem, 0, 0);
+  transform: translateX(1rem);
 }
 
 .newslist-item-flair {
