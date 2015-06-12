@@ -1,9 +1,5 @@
 <div class="page">
 
-  <div class="newslist-overlay"
-    ng-if="expandedItem"
-    ng-click="toggleExpanded(expandedItem);"></div>
-
   <div class="newslist-row"
     ng-class="{'expanded': item.expanded, 'read': item.read}"
     ng-click="toggleExpanded(item); markAsRead(item);"

@@ -101,23 +101,3 @@
   font-weight: 600;
   text-transform: uppercase;
 }
-
-.newslist-overlay {
-  background-color: #fff;
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-
-.newslist-overlay.ng-enter {
-  opacity: 0;
-  transition: opacity linear 0.5s;
-}
-
-.newslist-overlay.ng-enter-active {
-  opacity: 0.5;
-}
