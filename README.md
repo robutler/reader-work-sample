@@ -2,7 +2,7 @@
 
 ## Setup
 
-Requirements: Node.js 0.10.x or highter. Bower (npm install -g bower).
+Requirements: Node.js 0.10.x or highter. Bower (npm install -g bower). Grunt (npm install -g grunt-cli).
 
 Run `npm install && bower install` from the command line to install dependencies.
 
