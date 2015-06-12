@@ -1,0 +1,25 @@
+<div class="slide-show">
+
+  <div
+    class="slide-show-item"
+    ng-repeat="item in items"
+    ng-style="{'background-image': 'url(' + item.imageSrc + ')',
+      'background-color': getFillColorHex($index)}">
+
+    <div class="slide-show-item-content">
+      <div class="slide-show-item-title-box">
+        <div class="slide-show-item-title"
+          ng-bind="::item.title.__cdata"
+          ng-style="{'background-color': 'rgba(' + getDarkColorRgb($index) + ', 0.8)'}"></div>
+      </div>
+      <div class="slide-show-item-summary" ng-style="{'background-color': 'rgb(' + getDarkColorRgb($index) + ')'}">
+        <div class="slide-show-item-summary-content" ng-bind-html="::item.description.__cdata"></div>
+        <div class="slide-show-item-link">
+          <a href="{{::item.link}}">Read the full article at DN.se</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
