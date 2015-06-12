@@ -2,7 +2,7 @@
 
 ## Setup
 
-Requirements: Node.js 0.10.x or highter. Bower (npm install -g bower). Grunt (npm install -g grunt-cli).
+Requirements: Node.js 0.10.x or higher. Bower (npm install -g bower). Grunt (npm install -g grunt-cli).
 
 Run `npm install && bower install` from the command line to install dependencies.
 
@@ -29,4 +29,4 @@ Apache License 2.0
 ## Notes
 
 Tested on the latest versions of Chrome, Firefox, and Safari.
-Project will not run properly on browers that doesn't support Flexbox.
+Project will not run properly on browsers that doesn't support Flexbox.
