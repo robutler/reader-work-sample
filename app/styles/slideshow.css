@@ -1,20 +1,26 @@
-.slide-show {
-  position: relative;
+.slide-show-viewport {
   height: 250px;
   width: 400px;
+}
+
+.slide-show-items {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .slide-show-item {
   background-size: cover;
   background-repeat: no-repeat;
+  display: inline-block;
+  float: left;
   height: 100%;
   overflow: hidden;
-  width: 100%;
-  position: relative;
+  width: 400px;
+  position: absolute;
 }
 
 .slide-show-item-content {
-  position: absolute;
   width: 100%;
 }
 
@@ -69,3 +75,54 @@
 .slide-show-item-summary img, .slide-show-item-summary br {
   display: none;
 }
+
+.slide-show-item-overlay {
+  background-color: #000;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Animations */
+/* In */
+.slide-show-item.ng-hide-remove {
+  transform: translateX(400px);
+  transition: transform ease-out 0.5s; /* Dummy opacity duration to wait for child animations */
+  z-index: 1;
+}
+
+.slide-show-item.ng-hide-remove-active {
+  transform: translateX(0);
+}
+
+.slide-show-item.ng-hide-remove .slide-show-item-content {
+  transform: translateY(125px);
+  transition: transform ease-out 0.5s;
+}
+
+.slide-show-item.ng-hide-remove-active .slide-show-item-content {
+  transform: translateY(0);
+}
+
+/* Out */
+.slide-show-item.ng-hide-add {
+  transform: translateX(0);
+  transition: transform ease-out 0.5s;
+}
+
+.slide-show-item.ng-hide-add-active {
+  transform: translateX(-200px);
+}
+
+.slide-show-item.ng-hide-add .slide-show-item-overlay {
+  opacity: 0;
+  transition: opacity linear 0.5s;
+}
+
+.slide-show-item.ng-hide-add-active .slide-show-item-overlay {
+  opacity: 0.8;
+}
+

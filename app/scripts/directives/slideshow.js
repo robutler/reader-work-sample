@@ -34,18 +34,22 @@
       }
     ];
 
-    function compile(element, attrs) {
-      element.append('');
-      return link;
-    }
-
     function link(scope, element, attrs) {
+      scope.currentIndex = 0;
+
       scope.getFillColorHex = function (index) {
         return colorPalette[index % colorPalette.length].fill;
       };
       scope.getDarkColorRgb = function (index) {
         return colorPalette[index % colorPalette.length].dark;
       };
+      scope.nextSlide = function () {
+        if (scope.currentIndex === (scope.items.length - 1)) {
+          scope.currentIndex = 0;
+        } else {
+          scope.currentIndex++;
+        }
+      }
     }
 
     return {
