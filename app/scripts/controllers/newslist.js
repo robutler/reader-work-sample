@@ -12,6 +12,8 @@
    * Controller of the readerWorkSampleApp
    */
   app.controller('NewsListController', ['$scope', 'NewsService', function ($scope, NewsService) {
+    console.info('NewsListController started');
+
     NewsService.fetchNews().then(function (data) {
       $scope.news = data;
     });
@@ -34,7 +36,6 @@
     };
 
     $scope.markAsRead = function (item) {
-      console.log('markAsRead');
       if (!item.read) {
         item.read = true;
       }

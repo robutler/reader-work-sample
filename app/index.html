@@ -14,6 +14,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/newslist.css">
+    <link rel="stylesheet" href="styles/newsslide.css">
     <!-- endbuild -->
   </head>
   <body ng-app="readerWorkSampleApp">
@@ -25,6 +26,10 @@
 
       <header class="root-header">
         <div class="title">News Reader Work Sample</div>
+        <div class="buttons">
+          <button class="header-button" ng-click="navigateTo('/list');">List</button>
+          <button class="header-button" ng-click="navigateTo('/slide');">Slide</button>
+        </div>
       </header>
 
       <div class="content" ng-view=""></div>
@@ -51,6 +56,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/services/news.js"></script>
     <script src="scripts/controllers/newslist.js"></script>
+    <script src="scripts/controllers/newsslide.js"></script>
     <!-- endbuild -->
 </body>
 </html>
