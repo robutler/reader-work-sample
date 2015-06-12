@@ -23,7 +23,7 @@
     /**
      * @ngdoc method
      * @name NewsService#fetchNews
-     * @methodOf MewsService
+     * @methodOf NewsService
      * @description Fetches the news.
      * @returns {Object} Returns a promise object.
      */
