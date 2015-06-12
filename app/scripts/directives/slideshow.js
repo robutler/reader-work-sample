@@ -4,7 +4,7 @@
   var angular = window.angular,
     app = angular.module('readerWorkSampleApp');
 
-  app.directive('slideShow', [function () {
+  app.directive('slideShow', ['$interval', function ($interval) {
 
     var colorPalette = [
       {
@@ -35,14 +35,18 @@
     ];
 
     function link(scope, element, attrs) {
+      var timer;
+
       scope.currentIndex = 0;
 
       scope.getFillColorHex = function (index) {
         return colorPalette[index % colorPalette.length].fill;
       };
+
       scope.getDarkColorRgb = function (index) {
         return colorPalette[index % colorPalette.length].dark;
       };
+
       scope.nextSlide = function () {
         if (scope.currentIndex === (scope.items.length - 1)) {
           scope.currentIndex = 0;
@@ -50,6 +54,27 @@
           scope.currentIndex++;
         }
       }
+
+      scope.startSlideShow = function () {
+        if (timer) {
+          $interval.cancel(timer);
+        }
+
+        timer = $interval(function () {
+          scope.nextSlide();
+        }, 5000);
+      };
+
+      scope.stopSlideShow = function () {
+        $interval.cancel(timer);
+      };
+
+      scope.$on('$destroy', function() {
+        $interval.cancel(timer);
+      });
+
+      scope.startSlideShow();
+
     }
 
     return {

@@ -7,13 +7,16 @@
       ng-repeat="item in items"
       ng-show="currentIndex === $index"
       ng-style="{'background-image': 'url(' + item.imageSrc + ')',
-        'background-color': getFillColorHex($index)}">
+        'background-color': getFillColorHex($index)}"
+      ng-mouseover="stopSlideShow();"
+      ng-mouseleave="startSlideShow();">
 
       <div class="slide-show-item-content">
         <div class="slide-show-item-title-box">
           <div class="slide-show-item-title"
-            ng-bind="::item.title.__cdata"
-            ng-style="{'background-color': 'rgba(' + getDarkColorRgb($index) + ', 0.8)'}"></div>
+            ng-style="{'background-color': 'rgba(' + getDarkColorRgb($index) + ', 0.8)'}">
+            <span ng-bind="::item.title.__cdata"></span>
+          </div>
         </div>
         <div class="slide-show-item-summary" ng-style="{'background-color': 'rgb(' + getDarkColorRgb($index) + ')'}">
           <div class="slide-show-item-summary-content" ng-bind-html="::item.description.__cdata"></div>
@@ -28,7 +31,5 @@
     </div>
 
   </div>
-
-  <a href="" ng-click="nextSlide()">Next</a>
 
 </div>

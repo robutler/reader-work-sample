@@ -12,7 +12,6 @@
 .slide-show-item {
   background-size: cover;
   background-repeat: no-repeat;
-  display: inline-block;
   float: left;
   height: 100%;
   overflow: hidden;
@@ -98,13 +97,15 @@
   transform: translateX(0);
 }
 
-.slide-show-item.ng-hide-remove .slide-show-item-content {
-  transform: translateY(125px);
-  transition: transform ease-out 0.5s;
+.slide-show-item.ng-hide-remove .slide-show-item-title span {
+  transform: translateX(100px);
+  opacity: 0.25;
+  transition: transform ease-out 0.4s 0.1s, opacity linear 0.4s 0.1s;
 }
 
-.slide-show-item.ng-hide-remove-active .slide-show-item-content {
-  transform: translateY(0);
+.slide-show-item.ng-hide-remove-active .slide-show-item-title span {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Out */
@@ -114,7 +115,7 @@
 }
 
 .slide-show-item.ng-hide-add-active {
-  transform: translateX(-200px);
+  transform: translateX(-100px);
 }
 
 .slide-show-item.ng-hide-add .slide-show-item-overlay {
