@@ -17,8 +17,34 @@
     console.info('NewsService started');
 
     var service = {},
-      // Proxied locally to avoid cross-domain request issues, resolves to http://www.dn.se/nyheter/m/rss/
-      newsPath = 'http://localhost:9000/dn/nyheter/m/rss/';
+      newsPath = '/dn/nyheter/m/rss/', // Proxied locally to avoid cross-domain request issues, resolves to http://www.dn.se/nyheter/m/rss/
+      localNewsPath = 'localDn.xml', // Local backup in case proxy fails,
+      x2js = new X2JS();
+
+    function getAndValidateNews(path) {
+      var deferred = $q.defer();
+
+      $http.get(path)
+        .success(function (data, status, headers, config) {
+          var json = x2js.xml_str2json(data);
+
+          if (json &&
+              json.hasOwnProperty('rss') &&
+              json.rss.hasOwnProperty('channel') &&
+              json.rss.channel.hasOwnProperty('item')) {
+            console.log('[NewsService] Successfully got news from', path, status);
+            deferred.resolve(json.rss.channel.item);
+          } else {
+            deferred.reject('[NewsService] No items in the feed from', path, status);
+          }
+
+        })
+        .error(function (data, status, headers, config) {
+          deferred.reject('[NewsService] Unable to fetch news from', path, status);
+        });
+
+      return deferred.promise;
+    }
 
     /**
      * @ngdoc method
@@ -28,28 +54,27 @@
      * @returns {Object} Returns a promise object.
      */
     service.fetchNews = function () {
-      var deferred = $q.defer(),
-        x2js = new X2JS();
+      var deferred = $q.defer();
 
-      $http.get(newsPath)
-        .success(function (data, status, headers, config) {
-          var json = x2js.xml_str2json(data);
+      function resolveNews(data) {
+        service.news = data;
+        deferred.resolve(data);
+      }
 
-          if (json.hasOwnProperty('rss') &&
-              json.rss.hasOwnProperty('channel') &&
-              json.rss.channel.hasOwnProperty('item')) {
-            service.news = json.rss.channel.item;
-            deferred.resolve(json.rss.channel.item);
-          } else {
-            deferred.reject('No items in the feed');
-          }
-
-        })
-        .error(function (data, status, headers, config) {
-          deferred.reject('Unable to fetch news');
+      getAndValidateNews(newsPath)
+        .then(resolveNews)
+        .catch(function () {
+          console.warn('[NewsService.fetchNews] Unable to fetch news from ' + newsPath + ', trying local backup');
+          getAndValidateNews(localNewsPath)
+            .then(resolveNews)
+            .catch(function (error) {
+              console.warn('[NewsService.fetchNews] error:', error);
+              deferred.reject(error);
+            });
         });
 
       return deferred.promise;
+
     };
 
     return service;

@@ -30,3 +30,5 @@ Apache License 2.0
 
 Tested on the latest versions of Chrome, Firefox, and Safari.
 Project will not run properly on browsers that doesn't support Flexbox.
+
+If the proxied connection to DN.se fails, the app will try to load a local backup of the feed instead. This is to make sure there's always data visible in the UI for demo purposes.
