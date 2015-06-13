@@ -66,7 +66,7 @@
         } else {
           scope.currentIndex++;
         }
-      }
+      };
 
       scope.startSlideShow = function () {
         if (timer) {
@@ -97,7 +97,7 @@
         items: '='
       },
       link: link
-    }
+    };
 
   }]);
 
