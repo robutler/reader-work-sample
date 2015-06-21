@@ -22,28 +22,25 @@
       x2js = new X2JS();
 
     function getAndValidateNews(path) {
-      var deferred = $q.defer();
-
-      $http.get(path)
-        .success(function (data, status, headers, config) {
-          var json = x2js.xml_str2json(data);
+      return $http.get(path)
+        .then(function (response) {
+          var json = x2js.xml_str2json(response.data);
 
           if (json &&
               json.hasOwnProperty('rss') &&
               json.rss.hasOwnProperty('channel') &&
               json.rss.channel.hasOwnProperty('item')) {
-            console.log('[NewsService] Successfully got news from', path, status);
-            deferred.resolve(json.rss.channel.item);
-          } else {
-            deferred.reject('[NewsService] No items in the feed from', path, status);
+            console.log('[NewsService] Successfully got news from', path, response.status);
+            return json.rss.channel.item;
           }
 
+          console.warn('[NewsService] No items in the feed from', path);
+          return $q.reject(response);
         })
-        .error(function (data, status, headers, config) {
-          deferred.reject('[NewsService] Unable to fetch news from', path, status);
+        .catch(function (response) {
+          console.warn('[NewsService] Unable to fetch news from', path, response.status);
+          return $q.reject(response.status);
         });
-
-      return deferred.promise;
     }
 
     /**
@@ -54,27 +51,20 @@
      * @returns {Object} Returns a promise object.
      */
     service.fetchNews = function () {
-      var deferred = $q.defer();
-
-      function resolveNews(data) {
+      function setAndResolveNews(data) {
         service.news = data;
-        deferred.resolve(data);
+        return data;
       }
 
-      getAndValidateNews(newsPath)
-        .then(resolveNews)
+      return getAndValidateNews(newsPath)
+        .then(setAndResolveNews)
         .catch(function () {
-          console.warn('[NewsService.fetchNews] Unable to fetch news from ' + newsPath + ', trying local backup');
-          getAndValidateNews(localNewsPath)
-            .then(resolveNews)
+          return getAndValidateNews(localNewsPath)
+            .then(setAndResolveNews)
             .catch(function (error) {
-              console.warn('[NewsService.fetchNews] error:', error);
-              deferred.reject(error);
+              return $q.reject(error);
             });
         });
-
-      return deferred.promise;
-
     };
 
     return service;
